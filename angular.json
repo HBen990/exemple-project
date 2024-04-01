@@ -34,7 +34,10 @@
               "src/favicon.ico",
               "src/assets"
             ],
-            "styles": [
+            "styles": [ 
+              "node_modules/primeng/resources/themes/saga-blue/theme.css",
+            "node_modules/primeng/resources/primeng.min.css",
+            "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/styles.css"
             ],
             "scripts": [],
@@ -106,5 +109,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "4cc958ae-0b15-4f6d-a0df-924e866c6ef2"
   }
 }
