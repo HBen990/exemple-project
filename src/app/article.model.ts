@@ -1,11 +1,11 @@
 export class Article
 {
-  language: string;
-  articleDestinationID: string[] = [];
+  lingua: string;
+  destinationID: string[] = [];
   paragraphs: {
     paragraphId: number[];
     paragraphTitle: string;
-    paragraphDescription: string;
+    paragraphText: string;
     paragraphDestinationId: string[];
   }[] = [];
   title: string = '';
@@ -17,9 +17,9 @@ export class Article
     this.title = '';
     this.subtitle = '';
     this.description = '';
-    this.articleDestinationID = [];
+    this.destinationID = [];
     this.paragraphs = [];
-    this.language = '';
+    this.lingua = '';
   }
 
 }

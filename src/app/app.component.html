@@ -2,12 +2,13 @@
   <!-- Title -->
   <h5 class="title">CREA ARTICOLO</h5>
 
+  <!-- Panel Articolo -->
   <p-panel header="Informazioni principali" styleClass="header-color">
 
     <!-- Articolo Lingua, Titolo e Sottotitolo -->
     <div class="row">
-      <!-- Lingua Articolo -->
 
+      <!-- Lingua Articolo -->
       <div class="col-2" [formGroup]="articleForm">
         <label class="label-costum" for="language">Lingua</label>
         <p-dropdown [options]="languageOptions" formControlName="selectedLanguage"
@@ -39,8 +40,7 @@
         <input pInputText id="subtitle" formControlName="subtitle" class="custom-input"
           placeholder="Inserisci il sottotitolo" name="subtitle" />
         <div *ngIf="formSubmitted && articleForm.get('subtitle')?.errors?.['required']"
-          class="text-danger">Campo
-          obbligatorio</div>
+          class="text-danger">Campo obbligatorio</div>
         <div *ngIf="articleForm.get('subtitle')?.errors?.['maxWordsExceeded']" class="text-danger">
           Inserire massimo 17 parole
         </div>
@@ -49,6 +49,7 @@
 
     <!-- Articolo Descrizione e Città -->
     <div class="row">
+
       <!-- Descrizione Articolo -->
       <div class="col-12" [formGroup]="articleForm">
         <label class="label-costum" for="description"
@@ -90,8 +91,12 @@
   <div [formGroup]="articleForm">
     <div formArrayName="paragraphs">
       <div *ngFor="let paragraph of paragraphArray.controls; let i = index" [formGroupName]="i">
+
+        <!-- Panel Paragrafo -->
         <p-panel [header]="'Paragrafo ' + (i + 1)" styleClass="header-color">
           <div class="row">
+
+            <!-- Titolo Paragrafo -->
             <div class="col-5">
               <label
                 [class.invalid-label]="formSubmitted && paragraph.get('paragraphTitle')?.invalid"
@@ -105,17 +110,18 @@
               </div>
             </div>
           </div>
-          <!-- altri campi per il paragrafo -->
+
           <div class="row">
+
+            <!-- Descrizione Paragrafo -->
             <div class="col-12">
               <label
-                [class.invalid-label]="formSubmitted && paragraph.get('paragraphDescription')?.invalid"
-                class="label-costum" for="paragraphDescription">Descrizione del Paragrafo*</label>
-              <textarea pInputTextarea id="paragraphDescription"
-                formControlName="paragraphDescription" class="custom-textarea"
-                placeholder="Inserisci la descrizione del paragrafo" name="paragraphDescription"
-                required></textarea>
-              <div *ngIf="formSubmitted && paragraph.get('paragraphDescription')?.invalid"
+                [class.invalid-label]="formSubmitted && paragraph.get('paragraphText')?.invalid"
+                class="label-costum" for="paragraphText">Descrizione del Paragrafo*</label>
+              <textarea pInputTextarea id="paragraphText" formControlName="paragraphText"
+                class="custom-textarea" placeholder="Inserisci la descrizione del paragrafo"
+                name="paragraphText" required></textarea>
+              <div *ngIf="formSubmitted && paragraph.get('paragraphText')?.invalid"
                 class="text-danger">
                 Campo obbligatorio
               </div>
@@ -123,6 +129,8 @@
           </div>
 
           <div class="row">
+
+            <!-- Città Paragrafo -->
             <div class="col-9">
               <label
                 [class.invalid-label]="formSubmitted && paragraph.get('paragraphDestinationID')?.invalid"
@@ -137,12 +145,14 @@
             </div>
 
           </div>
-          <!-- Articolo immagine -->
+
+          <!-- Immagine Paragrafo -->
           <div class="row">
             <div class="col-6">
               <label class="label-costum">Carica immagine*</label>
               <input type="file" class="custom-input" name="image" required />
             </div>
+
             <!-- Reset Paragrafo-->
             <div class="col-1 reset">
               <button pButton type="button" icon="pi pi-refresh" label="Reset"
@@ -153,18 +163,14 @@
       </div>
     </div>
   </div>
-
-
-
-
   <br>
+
   <!-- Bottoni Salva, Aggiungi-->
   <div class="row">
     <div class="col-1">
       <button pButton type="button" icon="pi pi-save" label="Salva" class="p-button-success"
         (click)="saveArticle()">
       </button>
-
     </div>
     <div class="col">
       <p-button label="Aggiungi" icon="pi pi-plus" (click)="addParagraph()"></p-button>

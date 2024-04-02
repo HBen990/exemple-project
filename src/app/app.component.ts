@@ -63,10 +63,8 @@ export class AppComponent implements OnInit
   {
     return this.fb.group({
       paragraphTitle: ['', Validators.required],
-      paragraphDescription: ['', Validators.required],
+      paragraphText: ['', Validators.required],
       paragraphDestinationID: ['', Validators.required],
-
-      // altri campi per il paragrafo
     });
   }
 
@@ -88,34 +86,14 @@ export class AppComponent implements OnInit
     this.formSubmitted = false;
   }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   saveArticle()
   {
     this.formSubmitted = true;
     if (this.articleForm.valid) {
       const articleData = new Article();
       const cities = this.articleForm.value.articleDestinationID.split(' ').map((city: string) => city.trim());
-      articleData.language = this.selectedLanguage;
-      articleData.articleDestinationID = cities;
+      articleData.lingua = this.selectedLanguage;
+      articleData.destinationID = cities;
       articleData.title = this.articleForm.value.title;
       articleData.subtitle = this.articleForm.value.subtitle;
       articleData.description = this.articleForm.value.description;
@@ -124,24 +102,15 @@ export class AppComponent implements OnInit
       const paragraphs = paragraphsArray.controls.map((control, index) =>
       {
         const paragraph = control.value;
-        paragraph.paragraphId = index + 1; // Assegna un paragraphId incrementale
+        paragraph.paragraphId = index + 1;
         if (typeof paragraph.paragraphDestinationID === 'string') {
           const destinations: string[] = paragraph.paragraphDestinationID.split(' ').filter(Boolean).map((destination: string) => destination.trim());
           paragraph.paragraphDestinationID = destinations;
         }
         return paragraph;
       });
-
       articleData.paragraphs = paragraphs;
-
-      console.log(articleData);
-
-
-
-      // Salva l'oggetto article in sessionStorage
       sessionStorage.setItem('articolo', JSON.stringify(articleData));
-
-      console.log('Articolo salvato con successo:', articleData);
     }
   }
 
